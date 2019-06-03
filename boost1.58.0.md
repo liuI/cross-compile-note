@@ -4,7 +4,7 @@
 
 ``` bash
 tar jxvf boost_1_58_0.tar.bz2 && cd boost_1_58_0
-./bootstrap.sh --prefix=/buildroot/aarch64/boost
+./bootstrap.sh --prefix=/home/i/armhf/boost
 sed -i 's/using gcc ;/using gcc : armhf : arm-linux-gnueabihf-g++ ;/g' project-config.jam
 ./b2 --toolset=gcc-armhf --without-test --no-samples -j 8 
 ./b2 -j 8 install
@@ -18,7 +18,7 @@ sed -i 's/using gcc ;/using gcc : armhf : arm-linux-gnueabihf-g++ ;/g' project-c
 ``` bash
 tar jxvf boost_1_58_0.tar.bz2 && cd boost_1_58_0
 sed -i 's/!defined(_M_ARM)/!defined(_M_ARM) \&\& !defined(__aarch64__)/g' libs/config/checks/architecture/arm.cpp
-./bootstrap.sh --prefix=/buildroot/aarch64/boost
+./bootstrap.sh --prefix=/home/i/aarch64/boost
 sed -i 's/using gcc ;/using gcc : aarch64 : aarch64-linux-gnu-g++ ;/g' project-config.jam
 ./b2 --toolset=gcc-aarch64 --without-test --no-samples -j 8 
 ./b2 -j 8 install
