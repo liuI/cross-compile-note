@@ -5,7 +5,25 @@
 ### 构建工具： x86_64-linux-gnu-gcc(v5.4) cmake make
 ### 交叉编译工具链： arm-linux-gnueabihf-gcc arm-linux-gnueabihf-g++
 
-默认根目录 /home/i/armhf，新建cmake toolchain file，文件名gcc-armhf.cmake，内容如下：
+默认根目录 /home/i/armhf
+```
+> armhf
+> ├── boost
+> ├── cpprest
+> │   ├── include
+> │   └── lib
+> ├── curl
+> │   ├── include
+> │   └── lib
+> ├── openssl
+> │   ├── include
+> │   └── lib
+> └── zlib
+> │   ├── include
+> │   └── lib
+```
+
+新建文件/home/i/armhf/gcc-armhf.cmake，内容如下：
 ```cmake
 SET(buildroot /home/i/armhf)
 
