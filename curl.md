@@ -1,3 +1,4 @@
+依赖openssl和zlib，在这两个库已编译的情况下：
 ```bash
 tar zxvf curl-7.52.1.tar.gz && cd curl-7.52.1
 mkdir build.armhf && cd build.armhf
