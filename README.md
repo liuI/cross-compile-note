@@ -5,10 +5,12 @@
 ### 构建工具： x86_64-linux-gnu-gcc(v5.4) cmake make
 ### 交叉编译工具链： arm-linux-gnueabihf-gcc arm-linux-gnueabihf-g++
 
-默认根目录 /home/i/armhf
+默认根目录 /home/i/armhf，构建如下目录结构
 ```
 armhf
 ├── boost
+│   ├── include
+│   └── lib
 ├── cpprest
 │   ├── include
 │   └── lib
@@ -19,8 +21,8 @@ armhf
 │   ├── include
 │   └── lib
 └── zlib
-│   ├── include
-│   └── lib
+    ├── include
+    └── lib
 ```
 
 新建文件/home/i/armhf/gcc-armhf.cmake，内容如下：
@@ -54,4 +56,7 @@ SET(BOOST_ROOT ${buildroot}/boost)
 SET(OPENSSL_ROOT_DIR ${buildroot}/openssl)
 SET(ZLIB_ROOT ${buildroot}/zlib)
 SET(CURL_ROOT ${buildroot}/curl)
+
+include_directories(${buildroot}/cpprest/include)
+link_directories(${buildroot}/cpprest/lib)
 ```
