@@ -7,20 +7,20 @@
 
 默认根目录 /home/i/armhf
 ```
-> armhf
-> ├── boost
-> ├── cpprest
-> │   ├── include
-> │   └── lib
-> ├── curl
-> │   ├── include
-> │   └── lib
-> ├── openssl
-> │   ├── include
-> │   └── lib
-> └── zlib
-> │   ├── include
-> │   └── lib
+armhf
+├── boost
+├── cpprest
+│   ├── include
+│   └── lib
+├── curl
+│   ├── include
+│   └── lib
+├── openssl
+│   ├── include
+│   └── lib
+└── zlib
+│   ├── include
+│   └── lib
 ```
 
 新建文件/home/i/armhf/gcc-armhf.cmake，内容如下：
