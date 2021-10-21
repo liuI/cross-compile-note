@@ -1,31 +1,9 @@
 # cross-compile-script
 
 ### 记录几个交叉编译时，常用库的编译指令
-### 构建环境： Ubuntu 16.04 x64
-### 构建工具： x86_64-linux-gnu-gcc(v5.4) cmake make
-### 交叉编译工具链： arm-linux-gnueabihf-gcc arm-linux-gnueabihf-g++
 
-默认根目录 /home/i/armhf，构建如下目录结构
-```
-armhf
-├── boost
-│   ├── include
-│   └── lib
-├── cpprest
-│   ├── include
-│   └── lib
-├── curl
-│   ├── include
-│   └── lib
-├── openssl
-│   ├── include
-│   └── lib
-└── zlib
-    ├── include
-    └── lib
-```
+cmake toolchain file:
 
-新建文件/home/i/armhf/gcc-armhf.cmake，内容如下：
 ```cmake
 SET(buildroot /home/i/armhf)
 
