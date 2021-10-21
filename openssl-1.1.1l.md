@@ -1,6 +1,6 @@
 [SourceCode](https://www.openssl.org/source/openssl-1.1.1l.tar.gz)
 
-##解压 uncompress
+## 解压 uncompress
 ```bash
 tar zxf openssl-1.1.1l.tar.gz
 ```
