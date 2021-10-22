@@ -1,18 +1,21 @@
 FROM ubuntu:20.04
-LABEL maintainer="liu.i@outlook.com"
+LABEL maintainer="liuquan@candela.com"
 
-# update apt source
+# setup environment
+ENV DISPLAY=:1
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
+# install packages
 RUN sed -i 's/http:\/\/archive.ubuntu.com/http:\/\/mirrors.163.com/g' /etc/apt/sources.list
 RUN sed -i 's/http:\/\/security.ubuntu.com/http:\/\/mirrors.163.com/g' /etc/apt/sources.list
 
-# install packages
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get install --no-install-recommends -y apt-transport-https dirmngr gnupg2 lsb-release ca-certificates \
     sudo software-properties-common wget curl tree vim pkg-config cmake make automake binutils binutils-aarch64-linux-gnu binutils-arm-linux-gnueabihf gcc g++ gcc-7 g++-7 \
     gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf g++-aarch64-linux-gnu g++-arm-linux-gnueabihf gcc-multilib-arm-linux-gnueabihf gdb git \
     libcpprest-dev openssl libssl-dev libboost-all-dev libboost-context-dev libboost-test-dev libzmq5 libyaml-cpp-dev libnm-dev libsdl1.2-dev libsdl-image1.2 libceres1 libzmq5-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# add user 'user' & add to sudo group
 RUN useradd -ms /bin/bash user && yes 1234 | passwd user && adduser user sudo && echo 'user ALL=(ALL)NOPASSWD:ALL' > /etc/sudoers
 USER user
 WORKDIR /home/user
@@ -65,7 +68,9 @@ RUN cd ~/source-code/openssl-1.1.1l && ./Configure no-shared zlib linux-aarch64 
 
 #for compile boost
 RUN echo "using gcc : armhf : arm-linux-gnueabihf-g++ ;\nusing gcc : aarch64 : aarch64-linux-gnu-g++ ;" > /home/user/user-config.jam
-RUN cd ~/source-code/boost_1_72_0 && ./bootstrap.sh && ./b2 --prefix=/home/user/armhf toolset=gcc-armhf install && ./b2 --clean && ./b2 --prefix=/home/user/aarch64 toolset=gcc-aarch64 install && ./b2 --clean 
+RUN cd ~/source-code/boost_1_72_0 && ./bootstrap.sh && \
+    ZLIB_LIBRARY_PATH=/home/user/armhf/lib   ZLIB_INCLUDE=/home/user/armhf/include   ./b2 --prefix=/home/user/armhf   toolset=gcc-armhf install && ./b2 --clean && \
+    ZLIB_LIBRARY_PATH=/home/user/aarch64/lib ZLIB_INCLUDE=/home/user/aarch64/include ./b2 --prefix=/home/user/aarch64 toolset=gcc-aarch64 install && ./b2 --clean 
 
 #for compile curl
 RUN cd ~/source-code/curl-curl-7_79_1 && mkdir build.armhf && cd build.armhf && \
@@ -114,6 +119,7 @@ RUN cd ~/source-code/cpprestsdk-2.10.18 && mkdir build.armhf && cd build.armhf &
              -DBUILD_TESTS=OFF -DBUILD_SAMPLES=OFF \
              -DCPPREST_EXCLUDE_WEBSOCKETS=1 \
              && make -j 4 && make install
+
 RUN cd ~/source-code/cpprestsdk-2.10.18 && mkdir build.aarch64 && cd build.aarch64 && \
     cmake .. -DCMAKE_BUILD_TYPE=Release \
              -DCMAKE_INSTALL_PREFIX=/home/user/aarch64 \
@@ -131,5 +137,4 @@ RUN cd ~/source-code/cpprestsdk-2.10.18 && mkdir build.aarch64 && cd build.aarch
              -DCPPREST_EXCLUDE_WEBSOCKETS=1 \
              && make -j 4 && make install
 
-#clean
 RUN rm -rf ~/source-code && cd ~
