@@ -4,6 +4,8 @@
 using gcc : armhf : arm-linux-gnueabihf-g++ ;
 using gcc : aarch64 : aarch64-linux-gnu-g++ ;
 ```
+[references](https://www.boost.org/doc/libs/1_77_0/tools/build/doc/html/index.html#bbv2.reference.tools)
+
 ## 获取源代码: 
 [github](https://github.com/boostorg/boost/archive/refs/tags/boost-1.72.0.tar.gz)
 
@@ -18,4 +20,5 @@ using gcc : aarch64 : aarch64-linux-gnu-g++ ;
 ```
 ## 关于zlib
 [boost.build doc](https://www.boost.org/doc/libs/1_77_0/tools/build/doc/html/index.html#bbv2.reference.tools.libraries.zlib)
+
 通过设置环境变量 `ZLIB_LIBRARY_PATH` `ZLIB_INCLUDE` 指定zlib
