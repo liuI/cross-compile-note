@@ -16,3 +16,6 @@ using gcc : aarch64 : aarch64-linux-gnu-g++ ;
 ```
 ./bootstrap.sh && ./b2 toolset=gcc-aarch64 --prefix=<somewhere> install && ./b2 --clean
 ```
+## 关于zlib
+[boost.build doc](https://www.boost.org/doc/libs/1_77_0/tools/build/doc/html/index.html#bbv2.reference.tools.libraries.zlib)
+通过设置环境变量 `ZLIB_LIBRARY_PATH` `ZLIB_INCLUDE` 指定zlib
